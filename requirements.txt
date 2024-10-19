@@ -29,7 +29,6 @@ onnxruntime==1.19.2
 openai==1.50.2
 packaging==24.1
 pillow==10.4.0
-pipecat-ai==0.0.45
 propcache==0.2.0
 protobuf==4.25.5
 PyAudio==0.2.14
