@@ -7,6 +7,7 @@ EXPOSE 7860
 # Install Python dependencies
 COPY *.py .
 COPY ./requirements.txt requirements.txt
+COPY .env .env
 RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
 
 # Start the FastAPI server
