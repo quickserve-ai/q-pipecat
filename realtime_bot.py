@@ -74,9 +74,10 @@ async def main(room_url: str, token: str, callId: str, callDomain: str):
         # turn_detection=False,
         # tools=tools,
         instructions="""
-You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcribed customer audio calls.
+You are a bilingual English/Spanish Hotel Booking Agent for the Wyndham Grand Rio Mar.
 **Essential Directives:**
 - Be warm, professional, and efficient.
+- By default speak in english, but if a customer speaks to you in spanish or asks if you speak spanish then continue the conversation in spanish.
 - Use the guest's name when provided.
 - Keep responses concise, ideally under three sentences.
 - Don't collect personal information beyond what's necessary for the booking.
@@ -108,6 +109,8 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
    - Answer any other questions the guest may have.
    - If the inquiry is outside your scope, use the `transferCall` tool to transfer the guest to the appropriate department.
 **Always be courteous and helpful. Ensure the guest feels valued and their booking process is smooth and efficient.**
+
+To begin, please introduce yourself by saying "Hello, Buenos Dias. Thanks for calling the Wyndham Grand Rio Mar reservations line. How can I help you today?"
 """
     )
 
@@ -116,6 +119,7 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
         session_properties=session_properties,
         start_audio_paused=False,
     )
+
 
     # Create a standard OpenAI LLM context object using the normal messages format. The
     # OpenAIRealtimeBetaLLMService will convert this internally to messages that the
@@ -154,6 +158,7 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
     async def on_participant_left(transport, participant, reason):
         await task.queue_frame(EndFrame())
 
+
     @transport.event_handler("on_dialin_ready")
     async def on_dialin_ready(transport, cdata):
         # Hit the Daily API endpoint to update the pinless call
@@ -180,6 +185,7 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
                                         detail=f"Failed to update pinless call: {await response.text()}")
 
         print(f"Pinless call updated successfully for CallId: {callId}")
+
 
     runner = PipelineRunner()
 
