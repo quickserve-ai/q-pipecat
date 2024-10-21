@@ -117,7 +117,6 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
         start_audio_paused=False,
     )
 
-
     # Create a standard OpenAI LLM context object using the normal messages format. The
     # OpenAIRealtimeBetaLLMService will convert this internally to messages that the
     # openai WebSocket API can understand.
@@ -155,7 +154,6 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
     async def on_participant_left(transport, participant, reason):
         await task.queue_frame(EndFrame())
 
-
     @transport.event_handler("on_dialin_ready")
     async def on_dialin_ready(transport, cdata):
         # Hit the Daily API endpoint to update the pinless call
@@ -182,7 +180,6 @@ You are a Hotel Booking Agent for the Wyndham Grand Rio Mar. You handle transcri
                                         detail=f"Failed to update pinless call: {await response.text()}")
 
         print(f"Pinless call updated successfully for CallId: {callId}")
-
 
     runner = PipelineRunner()
 
