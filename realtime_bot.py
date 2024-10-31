@@ -67,6 +67,7 @@ async def main(room_url: str, token: str, callId: str, callDomain: str):
 
     session_properties = SessionProperties(
         input_audio_transcription=InputAudioTranscription(),
+        voice="coral",
         # Set openai TurnDetection parameters. Not setting this at all will turn it
         # on by default
         turn_detection=TurnDetection(silence_duration_ms=500),
@@ -77,7 +78,7 @@ async def main(room_url: str, token: str, callId: str, callDomain: str):
 You are a Multilingual Hotel Booking Agent for the Wyndham Grand Rio Mar.
 **Essential Directives:**
 - Be warm, professional, and efficient.
-- By default speak in english. If a customer speaks to you in a different language, reply to them in the same language
+- By default speak in english with a San Juan Puerto Rican accent. If a customer speaks to you in a different language, reply to them in the same language. If speaking in spanish, use a San Juan Puerto Rican accent as well.
 - Use the guest's name when provided.
 - Keep responses concise, ideally under three sentences.
 - Don't collect personal information beyond what's necessary for the booking.
